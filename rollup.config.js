@@ -4,6 +4,7 @@ import serve from "rollup-plugin-serve";
 import postcss from "rollup-plugin-postcss";
 import postcssImport from "postcss-import";
 import copy from "rollup-plugin-copy";
+import resolve from "rollup-plugin-node-resolve";
 
 export default {
   input: ["./src/main.ts"],
@@ -14,11 +15,19 @@ export default {
 
   plugins: [
     copy({
-      targets: [{ src: "src/index.html", dest: "dist" }],
+      targets: [
+        { src: "src/index.html", dest: "dist" },
+        {
+          src:
+            "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
+          dest: "dist"
+        }
+      ],
       copyOnce: true
     }),
     typescript({ objectHashIgnoreUnknownHack: true }),
     postcss({ plugins: [postcssImport] }),
+    resolve(),
     serve({
       contentBase: "dist",
       open: true
