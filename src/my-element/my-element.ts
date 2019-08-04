@@ -2,11 +2,11 @@ import { LitElement, html, customElement, property } from "lit-element";
 
 @customElement("simple-greeting")
 export class SimpleGreeting extends LitElement {
-  @property() name = "World!!";
+  @property() name = "my-element.ts";
 
   render() {
     return html`
-      <p>Hello, ${this.name}!</p>
+      <p>Hello from ${this.name}</p>
     `;
   }
 }
